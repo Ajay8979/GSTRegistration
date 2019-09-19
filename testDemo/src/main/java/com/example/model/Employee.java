@@ -1,13 +1,17 @@
 package com.example.model;
 
+import java.sql.SQLException;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -17,15 +21,19 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@NotNull(message = "Please enter id")
 	private Long id;
-	
+
 	@NotEmpty(message = "Please provide a name")
 	@Size(max = 20, min = 3, message = "{user.name.invalid}")
 	@Column(name = "empName")
 	private String name;
 	
-	//@NotEmpty(message = "Please provide  salary")
-	//@DecimalMin("1.00")
-	//@Column(name = "empSalary")
+	@Pattern(regexp = "[a-zA-Z0-9]*")
+	@NotEmpty(message = "please provide password")
+	private String password;
+
+	 @NotEmpty(message = "Please provide salary")
+	 @DecimalMin("1.00")
+	 @Column(name = "empSalary")
 	private double sal;
 
 	@NotEmpty(message = "Please provide designation")
@@ -64,5 +72,9 @@ public class Employee {
 		this.designation = designation;
 	}
 
-	
+	public Object thenReturn(SQLException sqlException) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

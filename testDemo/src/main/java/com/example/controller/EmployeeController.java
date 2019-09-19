@@ -1,9 +1,9 @@
 package com.example.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,27 +22,71 @@ public class EmployeeController {
 	private EmployeeService employeeService;
 
 	@RequestMapping(value = "save", method = RequestMethod.POST)
-	public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
+	public ResponseEntity<Object> createEmployee(@RequestBody Employee employee) throws SQLException {
 
+		
 		Employee addEmployee = employeeService.addEmployee(employee);
 
 		if (null != addEmployee) {
+			
 
-			return new ResponseEntity<Employee>(employee, HttpStatus.OK);
+			return new ResponseEntity<Object>(employee, HttpStatus.OK);
 
 		} else {
-			return new ResponseEntity<Employee>(employee, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Object>(employee, HttpStatus.BAD_REQUEST);
+		}
+		
+		
+	}
+
+	/*
+	 * @RequestMapping(value = "getAll", method = RequestMethod.GET) public
+	 * List<Employee> getAllEmployee() { List<Employee> customerRegList =
+	 * employeeService.getAllEmployee(); if (customerRegList != null) { return
+	 * customerRegList; } else { return null; }
+	 */
+	
+	
+	
+
+	
+	
+	
+	@RequestMapping(value = "getAll", method = RequestMethod.GET)
+	public ResponseEntity<Employee> getAllEmployee1() {
+		List<Employee> customerRegList = employeeService.getAllEmployee();
+		if (customerRegList != null) {
+			return new ResponseEntity<Employee>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Employee>(HttpStatus.BAD_REQUEST);
 
 		}
 	}
-
-	@RequestMapping(value = "save", method = RequestMethod.POST)
-	public  Page<Employee> getAllEmployee() {
-
-		List<Employee> customerRegList = employeeService.getAllEmployee();
-		return null;
+	
+	
+	
+	
+	
+	public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee){
+		
+		Employee updateEmployee = employeeService.updateEmployee(employee);
+		if(null!=updateEmployee) {
+			return new ResponseEntity<Employee>(HttpStatus.OK);
+		}
+		else {
+		
+		return new ResponseEntity<Employee>(HttpStatus.BAD_REQUEST);
+		}
+		
 		
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

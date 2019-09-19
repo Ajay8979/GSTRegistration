@@ -1,5 +1,6 @@
 package com.example.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +9,14 @@ import org.springframework.stereotype.Service;
 import com.example.model.Employee;
 import com.example.repo.EmployeeRepo;
 @Service
-public class EmployeeServiceImpl implements EmployeeService{
+public class EmployeeServiceImpl implements EmployeeService
+{
 	
 	@Autowired
 	private EmployeeRepo employeeRepo;
 
 	@Override
-	public Employee addEmployee(Employee employee) {
+	public Employee addEmployee(Employee employee) throws SQLException {
 		return employeeRepo.save(employee);
 	}
 
@@ -35,6 +37,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	@Override
 	public Employee updateEmployee(Employee emp) {
+		
+		
 		return employeeRepo.save(emp);
 	}
 
