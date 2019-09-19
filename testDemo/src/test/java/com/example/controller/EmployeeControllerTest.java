@@ -4,9 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.sql.SQLException;
-import java.util.List;
 
-import org.junit.Before;
+import org.aspectj.lang.annotation.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -29,7 +28,7 @@ public class EmployeeControllerTest {
 	 * @Spy ResponseEntity<Object> successResponse = new
 	 * ResponseEntity<>(HttpStatus.OK);
 	 */
-	@Before
+	@Before(value = "")
 	public void init() {
 		MockitoAnnotations.initMocks(this);
 	}
@@ -61,21 +60,23 @@ public class EmployeeControllerTest {
 		assertEquals(HttpStatus.CONFLICT, statusCode);
 	}
 
-	@Test
-	public void testGetAllEmployeePositive() {
-		List<Employee> allEmployee = employeeController.getAllEmployee();
-		when(employeeService.getAllEmployee()).thenReturn(allEmployee);
-		assertEquals(allEmployee, allEmployee);
+	/*
+	 * @Test public void testGetAllEmployeePositive() { List<Employee> allEmployee =
+	 * employeeController.getAllEmployee();
+	 * when(employeeService.getAllEmployee()).thenReturn(allEmployee);
+	 * assertEquals(allEmployee, allEmployee);
+	 * 
+	 * }
+	 */
 
-	}
-
-	@Test
-	public void testGetAllEmployeeNegative() {
-		List<Employee> allEmployee = employeeController.getAllEmployee();
-		when(employeeService.getAllEmployee()).thenReturn(null);
-		assertEquals(allEmployee, allEmployee);
-
-	}
+	/*
+	 * @Test public void testGetAllEmployeeNegative() { List<Employee> allEmployee =
+	 * employeeController.getAllEmployee();
+	 * when(employeeService.getAllEmployee()).thenReturn(null);
+	 * assertEquals(allEmployee, allEmployee);
+	 * 
+	 * }
+	 */
 
 	@Test
 	public void testGetAllEmployeeNegatvic() {
